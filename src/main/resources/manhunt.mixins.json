@@ -3,9 +3,13 @@
   "package": "com.github.leeonardoo.manhunt.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "CompassItemMixin",
+    "PlayerEntityMixin",
+    "PlayerInventoryMixin",
+    "PlayerManagerMixin"
   ],
   "client": [
-    "ExampleMixin"
+    "HeldItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

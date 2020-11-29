@@ -13,7 +13,6 @@ import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.text.LiteralText
 import net.minecraft.text.TranslatableText
-import java.util.*
 
 object HuntersCommand {
 
@@ -36,7 +35,7 @@ object HuntersCommand {
         ManhuntUtils.hunters.clear()
 
         if (playerHasMod) {
-            context.source.sendFeedback(TranslatableText("text.manhunt.command.hunters.clear"), true)
+            context.source.sendFeedback(TranslatableText("text.manhuntkt.command.hunters.clear"), true)
         } else {
             context.source.sendFeedback(LiteralText("Cleared hunter list!"), false)
         }
@@ -54,7 +53,7 @@ object HuntersCommand {
             if (playerHasMod) {
                 // And then send error message using TranslatableText
                 context.source.sendError(
-                    TranslatableText("text.manhunt.command.hunters.error.speedrunner", target.displayName)
+                    TranslatableText("text.manhuntkt.command.hunters.error.speedrunner", target.displayName)
                 )
 
                 // Source is not player or doesn't have mod, sending error message using LiteralText
@@ -72,7 +71,7 @@ object HuntersCommand {
         if (ManhuntUtils.hunters.contains(target.uuid)) {
             if (playerHasMod) {
                 context.source.sendError(
-                    TranslatableText("text.manhunt.command.hunters.error.hunter", target.displayName)
+                    TranslatableText("text.manhuntkt.command.hunters.error.hunter", target.displayName)
                 )
             } else {
                 context.source.sendError(
@@ -90,7 +89,7 @@ object HuntersCommand {
         ManhuntUtils.hunters.add(target.uuid)
 
         if (playerHasMod) {
-            context.source.sendFeedback(TranslatableText("text.manhunt.command.hunters.add", target.displayName), true)
+            context.source.sendFeedback(TranslatableText("text.manhuntkt.command.hunters.add", target.displayName), true)
         } else {
             context.source.sendFeedback(
                 LiteralText("Added ")
@@ -113,7 +112,7 @@ object HuntersCommand {
         if (playerHasMod) {
             context.source.sendFeedback(
                 TranslatableText(
-                    "text.manhunt.command.hunters.get",
+                    "text.manhuntkt.command.hunters.get",
                     java.lang.String.join(", ", hunterNames)
                 ), false
             )

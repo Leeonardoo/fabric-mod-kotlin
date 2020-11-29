@@ -35,7 +35,7 @@ object SpeedrunnerCommand {
         if (ManhuntUtils.hunters.contains(target.uuid)) {
             if (playerHasMod) {
                 context.source.sendError(
-                    TranslatableText("text.manhunt.command.speedrunner.error.hunter", target.displayName)
+                    TranslatableText("text.manhuntkt.command.speedrunner.error.hunter", target.displayName)
                 )
             } else {
                 context.source.sendError(
@@ -52,7 +52,7 @@ object SpeedrunnerCommand {
             ManhuntUtils.speedrunner?.let { uuid ->
                 context.source.sendFeedback(
                     TranslatableText(
-                        "text.manhunt.command.speedrunner.set", ManhuntUtils.fromCmdContext(context, uuid)?.displayName
+                        "text.manhuntkt.command.speedrunner.set", ManhuntUtils.fromCmdContext(context, uuid)?.displayName
                     ), true
                 )
             }
@@ -74,7 +74,7 @@ object SpeedrunnerCommand {
             if (playerHasMod) {
                 context.source.sendFeedback(
                     TranslatableText(
-                        "text.manhunt.command.speedrunner.get", ManhuntUtils.fromCmdContext(context, it)?.displayName
+                        "text.manhuntkt.command.speedrunner.get", ManhuntUtils.fromCmdContext(context, it)?.displayName
                     ), false
                 )
             } else {
@@ -94,7 +94,7 @@ object SpeedrunnerCommand {
         ManhuntUtils.speedrunner = null
 
         if (playerHasMod)
-            context.source.sendFeedback(TranslatableText("text.manhunt.command.speedrunner.clear"), true)
+            context.source.sendFeedback(TranslatableText("text.manhuntkt.command.speedrunner.clear"), true)
         else
             context.source.sendFeedback(LiteralText("Speedrunner Cleared!"), true)
 
