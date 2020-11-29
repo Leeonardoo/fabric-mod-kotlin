@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "manhuntkt",
   "version": "${version}",
-
   "name": "Manhunt Kotlin",
   "description": "Dream's manhunt, built on Kotlin for the Fabric Loader, heavily based on ytg1234's version.",
   "authors": [
@@ -11,13 +10,19 @@
   "contact": {
     "sources": "https://github.com/Leeonardoo/manhunt-fabric-kotlin"
   },
-
   "license": "LGPL-3.0-or-later",
   "icon": "assets/manhunt/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.leeonardoo.manhunt.ExampleModKt::init"
+      "com.github.leeonardoo.manhunt.Manhunt"
+    ],
+    "client": [
+      "com.github.leeonardoo.manhunt.ManhuntClient"
+    ],
+    "server": [],
+    "modmenu": [
+      "com.github.leeonardoo.manhunt.compat.ModMenuCompat"
     ]
   },
   "mixins": [
