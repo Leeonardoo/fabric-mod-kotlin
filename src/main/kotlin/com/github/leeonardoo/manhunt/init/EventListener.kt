@@ -3,6 +3,9 @@ package com.github.leeonardoo.manhunt.init
 import com.github.leeonardoo.manhunt.Manhunt
 import com.github.leeonardoo.manhunt.ManhuntUtils
 import com.github.leeonardoo.manhunt.ManhuntUtils.fromServer
+import com.github.leeonardoo.manhunt.command.ClearCacheCommand
+import com.github.leeonardoo.manhunt.command.HuntersCommand
+import com.github.leeonardoo.manhunt.command.SpeedrunnerCommand
 import com.github.leeonardoo.manhunt.config.Behaviours
 import com.mojang.brigadier.CommandDispatcher
 import net.minecraft.entity.effect.StatusEffects
@@ -23,9 +26,7 @@ object EventListener {
                 if (Manhunt.CONFIG.giveCompassWhenSettingHunters) {
                     fromServer(server, hunterUUID)?.equip(8, ItemStack(Items.COMPASS))
                     stack = fromServer(server, hunterUUID)?.inventory?.getStack(8)
-                } else if (stack == null) {
-                    return
-                }
+                } else if (stack == null) return
             }
 
             if (Manhunt.CONFIG.compassBehaviour == Behaviours.Compass.UPDATE) {
@@ -49,6 +50,10 @@ object EventListener {
     }
 
     fun registerCommands(commandDispatcher: CommandDispatcher<ServerCommandSource>, b: Boolean) {
-        //TODO
+        commandDispatcher.apply {
+            SpeedrunnerCommand.register(this)
+            HuntersCommand.register(this)
+            ClearCacheCommand.register(this)
+        }
     }
 }

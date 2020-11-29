@@ -10,15 +10,14 @@ import net.minecraft.util.Identifier
 
 object ManhuntPackets {
 
-    private val SERVER_QUESTION_PACKET_ID: Identifier = Identifier(Manhunt.MOD_ID, "question")
+    val SERVER_QUESTION_PACKET_ID: Identifier = Identifier(Manhunt.MOD_ID, "question")
     private val CLIENT_ANSWER_PACKET_ID: Identifier = Identifier(Manhunt.MOD_ID, "answer")
 
     fun registerClientPackets() {
         ClientSidePacketRegistry.INSTANCE.register(SERVER_QUESTION_PACKET_ID) { context, _ ->
             context.taskQueue.execute {
                 ClientSidePacketRegistry.INSTANCE.sendToServer(
-                    CLIENT_ANSWER_PACKET_ID,
-                    PacketByteBuf(Unpooled.buffer())
+                    CLIENT_ANSWER_PACKET_ID, PacketByteBuf(Unpooled.buffer())
                 )
             }
         }
