@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "net.fabricmc.example.mixin",
+  "package": "com.github.leeonardoo.manhunt.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],

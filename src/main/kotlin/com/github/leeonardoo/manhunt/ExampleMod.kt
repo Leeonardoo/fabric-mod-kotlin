@@ -1,4 +1,4 @@
-package net.fabricmc.example
+package com.github.leeonardoo.manhunt
 
 // For support join https://discord.gg/v6v4pMv
 
