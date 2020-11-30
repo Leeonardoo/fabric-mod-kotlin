@@ -14,15 +14,13 @@ object SpeedrunnerCommand {
 
     fun register(dispatcher: CommandDispatcher<ServerCommandSource>) {
         dispatcher.register(
-            CommandManager.literal("speedrunner")
+            CommandManager.literal("speedrunner").requires { it.hasPermissionLevel(2) }
                 .then(CommandManager.literal("set")
                     .then(CommandManager.argument("target", EntityArgumentType.player())
                         .executes { context -> executeSet(context) }
                     )
                 )
-
                 .then(CommandManager.literal("get").executes { context -> executeGet(context) })
-
                 .then(CommandManager.literal("clear").executes { context -> executeClear(context) })
         )
     }
@@ -52,7 +50,8 @@ object SpeedrunnerCommand {
             ManhuntUtils.speedrunner?.let { uuid ->
                 context.source.sendFeedback(
                     TranslatableText(
-                        "text.manhuntkt.command.speedrunner.set", ManhuntUtils.fromCmdContext(context, uuid)?.displayName
+                        "text.manhuntkt.command.speedrunner.set",
+                        ManhuntUtils.fromCmdContext(context, uuid)?.displayName
                     ), true
                 )
             }

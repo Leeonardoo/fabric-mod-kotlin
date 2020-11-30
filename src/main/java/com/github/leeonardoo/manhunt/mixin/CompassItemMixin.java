@@ -36,11 +36,9 @@ public abstract class CompassItemMixin extends Item {
                     if (stack == null || ManhuntUtils.INSTANCE.getSpeedrunner() == null) continue;
 
                     if (stack.getItem().equals(Items.COMPASS)) {
-                        ManhuntUtils.INSTANCE.updateCompass(
-                                stack, ManhuntUtils.INSTANCE.fromServer(
-                                        Objects.requireNonNull(player.getServer()), ManhuntUtils.INSTANCE.getSpeedrunner()
-                                )
-                        );
+                        player.equip(i, ManhuntUtils.INSTANCE.updateCompass(stack, ManhuntUtils.INSTANCE.fromServer(
+                                Objects.requireNonNull(player.getServer()), ManhuntUtils.INSTANCE.getSpeedrunner()
+                        )));
                     }
                 }
             }
