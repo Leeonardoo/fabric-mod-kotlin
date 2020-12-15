@@ -62,6 +62,6 @@ object ManhuntUtils {
     }
 
     fun applyStatusEffectToPlayer(player: PlayerEntity, effect: StatusEffect) {
-        player.applyStatusEffect(StatusEffectInstance(effect, 2))
+        player.addStatusEffect(StatusEffectInstance(effect, 2, 0, false, false))
     }
 }
