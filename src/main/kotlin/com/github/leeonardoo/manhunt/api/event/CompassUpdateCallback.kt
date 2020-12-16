@@ -27,7 +27,6 @@ interface CompassUpdateCallback {
     /**
      * Called when a hunter's compass updates.
      */
-    //TODO should probably get rid of those '!!'
     companion object {
         val EVENT: Event<CompassUpdateCallback>
             get() = EventFactory.createArrayBacked(CompassUpdateCallback::class.java) { listeners ->

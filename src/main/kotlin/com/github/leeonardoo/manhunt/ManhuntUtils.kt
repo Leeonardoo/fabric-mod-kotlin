@@ -11,6 +11,7 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.util.Identifier
 import org.apache.logging.log4j.Level
 import java.util.*
 
@@ -20,21 +21,27 @@ object ManhuntUtils {
     var hunters = mutableListOf<UUID>()
     var haveMod = mutableListOf<PlayerEntity>()
 
+    @JvmField
+    var SERVER_QUESTION_PACKET_ID: Identifier = Identifier(Manhunt.MOD_ID, "question")
+
+    @JvmField
+    val CLIENT_ANSWER_PACKET_ID = Identifier(Manhunt.MOD_ID, "answer")
+
     @Throws(CommandSyntaxException::class)
-    fun playerHasMod(context: CommandContext<ServerCommandSource>): Boolean {
-        return context.source.entity != null &&
-                context.source.entity is PlayerEntity &&
-                this.haveMod.contains(context.source.player)
-    }
+    fun playerHasMod(context: CommandContext<ServerCommandSource>) = context.source.entity != null &&
+            context.source.entity is PlayerEntity &&
+            this.haveMod.contains(context.source.player)
 
     fun fromCmdContext(context: CommandContext<ServerCommandSource>, uuid: UUID): ServerPlayerEntity? {
         return context.source.minecraftServer.playerManager.getPlayer(uuid)
     }
 
+    @JvmStatic
     fun fromServer(server: MinecraftServer, uuid: UUID?): ServerPlayerEntity? {
         return server.playerManager.getPlayer(uuid)
     }
 
+    @JvmStatic
     fun updateCompass(compass: ItemStack, target: ServerPlayerEntity?): ItemStack {
         if (target == null) {
             Manhunt.log(Level.WARN, "Compass target is null, can't update compass! Please fix!")
@@ -61,7 +68,7 @@ object ManhuntUtils {
         return newCompass
     }
 
-    fun applyStatusEffectToPlayer(player: PlayerEntity, effect: StatusEffect) {
-        player.addStatusEffect(StatusEffectInstance(effect, 2, 0, false, false))
+    fun applyStatusEffectToPlayer(player: PlayerEntity, effect: StatusEffect): Boolean {
+        return player.addStatusEffect(StatusEffectInstance(effect, 2, 0, false, false))
     }
 }

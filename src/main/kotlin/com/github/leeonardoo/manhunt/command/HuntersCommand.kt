@@ -89,7 +89,10 @@ object HuntersCommand {
         ManhuntUtils.hunters.add(target.uuid)
 
         if (playerHasMod) {
-            context.source.sendFeedback(TranslatableText("text.manhuntkt.command.hunters.add", target.displayName), true)
+            context.source.sendFeedback(
+                TranslatableText("text.manhuntkt.command.hunters.add", target.displayName),
+                true
+            )
         } else {
             context.source.sendFeedback(
                 LiteralText("Added ")

@@ -1,15 +1,12 @@
 package com.github.leeonardoo.manhunt
 
 import com.github.leeonardoo.manhunt.config.ManhuntConfig
-import com.github.leeonardoo.manhunt.init.EventListener
-import com.github.leeonardoo.manhunt.init.ManhuntPackets
+import com.github.leeonardoo.manhunt.init.ManhuntEvents
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer
 import net.fabricmc.api.ModInitializer
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
-import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Level
+import org.apache.logging.log4j.LogManager
 
 class Manhunt : ModInitializer {
 
@@ -30,10 +27,6 @@ class Manhunt : ModInitializer {
         AutoConfig.register(ManhuntConfig::class.java, ::JanksonConfigSerializer)
         CONFIG = AutoConfig.getConfigHolder(ManhuntConfig::class.java).config
 
-        ServerTickEvents.END_SERVER_TICK.register(EventListener::updateCompasses)
-        ServerTickEvents.END_SERVER_TICK.register(EventListener::highlightSpeedrunner)
-
-        CommandRegistrationCallback.EVENT.register(EventListener::registerCommands)
-        ManhuntPackets.registerServerPackets()
+        ManhuntEvents.registerCommonEvents()
     }
 }

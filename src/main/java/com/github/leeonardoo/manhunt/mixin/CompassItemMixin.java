@@ -18,8 +18,7 @@ import java.util.Objects;
 @Mixin(CompassItem.class)
 public abstract class CompassItemMixin extends Item {
 
-    //Defaut constructor
-    public CompassItemMixin(Settings settings) {
+    private CompassItemMixin(Settings settings) {
         super(settings);
     }
 
@@ -30,16 +29,18 @@ public abstract class CompassItemMixin extends Item {
                 ManhuntUtils.INSTANCE.getHunters().contains(player.getUuid())) {
 
             if (!world.isClient) {
-                for (int i = 0; i < player.inventory.size(); i++) {
-                    ItemStack stack = player.inventory.getStack(i);
+                ItemStack stack = player.getStackInHand(hand);
+                if (stack == null) {
+                    // This should never execute as it happens when a player uses that stack (so not null)
+                    return super.use(world, player, hand);
+                }
 
-                    if (stack == null || ManhuntUtils.INSTANCE.getSpeedrunner() == null) continue;
-
-                    if (stack.getItem().equals(Items.COMPASS)) {
-                        player.equip(i, ManhuntUtils.INSTANCE.updateCompass(stack, ManhuntUtils.INSTANCE.fromServer(
-                                Objects.requireNonNull(player.getServer()), ManhuntUtils.INSTANCE.getSpeedrunner()
-                        )));
-                    }
+                if (stack.getItem().equals(Items.COMPASS)) {
+                    player.equip(8, ManhuntUtils.updateCompass(
+                            stack, ManhuntUtils.fromServer(
+                                    Objects.requireNonNull(player.getServer()), ManhuntUtils.INSTANCE.getSpeedrunner()
+                            ))
+                    );
                 }
             }
             return TypedActionResult.success(player.getStackInHand(hand), world.isClient());
