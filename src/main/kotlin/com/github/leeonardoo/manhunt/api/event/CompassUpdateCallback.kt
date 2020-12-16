@@ -20,8 +20,8 @@ import net.minecraft.item.ItemStack
  * </p>
  *
  * @author YTG1234
+ * Adapted to Kotlin by Leeonardoo
  */
-@FunctionalInterface
 interface CompassUpdateCallback {
 
     /**
@@ -38,9 +38,9 @@ interface CompassUpdateCallback {
                             if (currentStack != null) {
                                 currentStack = listener.onCompassUpdate(oldStack, currentStack.copy())
                             }
-                            if (currentStack == oldStack) return oldStack!!
+                            if (currentStack == oldStack) return oldStack ?: ItemStack.EMPTY
                         }
-                        return currentStack!!
+                        return currentStack ?: ItemStack.EMPTY
                     }
                 }
             }
